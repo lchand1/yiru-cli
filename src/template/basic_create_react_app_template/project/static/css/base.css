@@ -6,12 +6,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding:0;
+  margin:0;
+}
+html,body,div,p,h1,h2,h3,li,ul,section,i{
+  padding:0;
+  margin:0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 :root {
   --toolbar-background: #1f2641;
   --toolbar-color: #f1f1f1;
