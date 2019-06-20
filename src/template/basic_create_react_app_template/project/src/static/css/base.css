@@ -1,0 +1,33 @@
+@import './color.css';
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+:root {
+  --toolbar-background: #1f2641;
+  --toolbar-color: #f1f1f1;
+  --toolbar-second-color: #dadada;
+  
+  --footerbar-background: #1f2641;
+  --footerbar-color: #f1f1f1;
+  --footerbar-second-color: #dadada;
+
+  --base-background: #1f2641;
+  --base-color: #fff;
+  --base-dark-color: #000;
+  --base-main-color: #f1f1f1;
+  --base-main-color-rgb: 241, 241, 241;
+
+  --base-second-color: #ebebeb;
+  --base-second-color-rgb: 235, 235, 235;
+  --base-second-background: #252d4b;
+}
