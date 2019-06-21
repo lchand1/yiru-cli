@@ -15,9 +15,31 @@ exports.run = function(projectName) {
               );
         } else {
             const pageFile = './' + projectName ;
-            fs.copy('/usr/local/lib/node_modules/yiru-cli/src/template/basic_create_react_app_template/project/.gitignore', './.gitignore', err => {
-                if (err) return console.error(err);
-            });
+            const result = fs.ensureDirSync("./.gitignore");
+            fs.writeFileSync('./.gitignore', `# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+      # dependencies
+      /node_modules
+      /.pnp
+      .pnp.js
+      
+      # testing
+      /coverage
+      
+      # production
+      /build
+      
+      # misc
+      .DS_Store
+      .env.local
+      .env.development.local
+      .env.test.local
+      .env.production.local
+      
+      npm-debug.log*
+      yarn-debug.log*
+      yarn-error.log*
+      `);
             fs.copy('/usr/local/lib/node_modules/yiru-cli/src/template/basic_create_react_app_template/project', pageFile, err => {
                 if (err) return console.error(err);
                 ProgressBar()
