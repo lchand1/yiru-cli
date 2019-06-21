@@ -5,6 +5,7 @@
 const fs = require('fs-extra');
 const chalk = require('chalk');
 var ProgressBar = require('./initProgress.js');
+const { execSync } = require('child_process');
 
 exports.run = function(projectName) {
     fs.pathExists(projectName, (err, exists) => {
@@ -14,6 +15,9 @@ exports.run = function(projectName) {
               );
         } else {
             const pageFile = './' + projectName ;
+            fs.copy('/usr/local/lib/node_modules/yiru-cli/src/template/basic_create_react_app_template/project/.gitignore', './.gitignore', err => {
+                if (err) return console.error(err);
+            });
             fs.copy('/usr/local/lib/node_modules/yiru-cli/src/template/basic_create_react_app_template/project', pageFile, err => {
                 if (err) return console.error(err);
                 ProgressBar()
