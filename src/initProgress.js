@@ -25,6 +25,14 @@ function downloading() {
         chalk.green(`        The project was created successfully      `)
       );
       console.log();
+      console.log(
+        chalk.green(`                    npm install                   `)
+      );
+      console.log();
+      console.log(
+        chalk.green(`            npm start & npm run build             `)
+      );
+      console.log();
       console.log();
       console.log();
       console.log('####################################################')
