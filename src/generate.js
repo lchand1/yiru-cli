@@ -177,7 +177,7 @@ exports.run = function(type, name, pureComponent, stateless) {
                             // page.tsx
                             fs.writeFileSync(pageFile, PageMain(name,NewName));
 
-                            const title = `ng generate page ${name}`
+                            const title = `ag generate page ${name}`
                             log(`> ${chalk.green(title)}`);
                             log(`${chalk.green('CREATE')}  ${pageFile} ${getSize(pageFile)}`);
 
@@ -221,7 +221,7 @@ exports.run = function(type, name, pureComponent, stateless) {
                                 fs.writeFileSync(componentInterface, ComponentInterface(NewName));
                                 fs.writeFileSync(componentModule, ComponentModule(NewName,typeCmp));
                                 fs.writeFileSync(cssFile, `.container{}`);
-                                const title = `ng generate component ${name}`
+                                const title = `ag generate component ${name}`
                                 log(`> ${chalk.green(title)}`);
                                 log(`${chalk.green('CREATE')}  ${componentFile} ${getSize(componentFile)}`);
                                 log(`${chalk.green('CREATE')}  ${componentInterface} ${getSize(componentInterface)}`);
@@ -233,7 +233,7 @@ exports.run = function(type, name, pureComponent, stateless) {
                             } else {
                                 fs.writeFileSync(componentFile, ComponentStatic(name,NewName));
                                 fs.writeFileSync(cssFile, `.container{}`);
-                                const title = `ng generate component ${name}`
+                                const title = `ag generate component ${name}`
                                 log(`> ${chalk.green(title)}`);
                                 log(`${chalk.green('CREATE')}  ${componentFile} ${getSize(componentFile)}`);
                                 log(`${chalk.green('CREATE')}  ${cssFile} ${getSize(cssFile)}`);
