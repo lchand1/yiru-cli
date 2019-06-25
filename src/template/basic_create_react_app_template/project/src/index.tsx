@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './static/css/base.css';
 import * as serviceWorker from './serviceWorker';
-import Index from './pages/home'
+import Index from './pages/home/home.page'
 
 
 
