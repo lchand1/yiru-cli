@@ -133,11 +133,8 @@ export const ${NewName}: React.SFC<Props> = (Props) => {
 `
 }
 const getSize=(url)=>{
-    let size = 0;
-    _fs.stat(`./${url}`, (err, stats) =>{
-        size= stats.size
-    })
-    return `(${size} bytes)`
+    const states = _fs.statSync(`./${url}`)
+    return `(${states.size} bytes)`
 }
 /**
  * 创建组件
@@ -165,36 +162,34 @@ exports.run = function(type, name, pureComponent, stateless) {
                     fs.pathExists(`./src/pages/${name}`, (err, exists) => {
                         let dirPath = path.join(process.cwd());
                         if (exists) {
-                            log()
-                            log(
-                                chalk.red(`        Error: ./src/pages/${name} already exists`)
-                              );
-                              log()
+                            log(chalk.yellow(`ERROR! ${pageFile} already exists.`));
+                            log(chalk.yellow(`ERROR! ${pageInterface} already exists.`));
+                            log(chalk.yellow(`ERROR! ${pageModule} already exists.`));
+                            log(chalk.yellow(`ERROR! ${styleFile} already exists.`));
+                            log(chalk.red(`The Schematic workflow failed. See above.`));
+                            log(`[${chalk.red('ERROR')}] Could not generate ${chalk.green('page')}.`)
                         } else {
+                            const title = `ag generate page ${name}`
+                            log(`> ${chalk.green(title)}`);
                             const result = fs.ensureDirSync('src/pages/' + name);
                             // console.log(path.join(dirPath, pageFile))
 
                             // page.tsx
                             fs.writeFileSync(pageFile, PageMain(name,NewName));
-
-                            const title = `ag generate page ${name}`
-                            log(`> ${chalk.green(title)}`);
-                            log(`${chalk.green('CREATE')}  ${pageFile} ${getSize(pageFile)}`);
-
                             // pageInterface
                             fs.writeFileSync(pageInterface, PageInterface(NewName));
-                            log(`${chalk.green('CREATE')}  ${pageInterface} ${getSize(pageInterface)}`);
-
                             // pageModule
                             fs.writeFileSync(pageModule, PageModule(NewName));
-                            log(`${chalk.green('CREATE')}  ${pageModule} ${getSize(pageModule)}`);
-
                             // page.scss
                             fs.writeFileSync(styleFile, PageScss());
-                            log(`${chalk.green('CREATE')}  ${styleFile} ${getSize(styleFile)}`);
-
-                            // over
-                            log(`[${chalk.green('OK')}] Generated ${chalk.green('page')}!`)
+                            // done
+                            setTimeout(function(){
+                                log(`${chalk.green('CREATE')} ${pageFile} ${getSize(pageFile)}`);
+                                log(`${chalk.green('CREATE')} ${pageInterface} ${getSize(pageInterface)}`);
+                                log(`${chalk.green('CREATE')} ${pageModule} ${getSize(pageModule)}`);
+                                log(`${chalk.green('CREATE')} ${styleFile} ${getSize(styleFile)}`);
+                                log(`[${chalk.green('OK')}] Generated ${chalk.green('page')}!`)
+                            },2000)
                         }
                     });
                     
@@ -207,43 +202,53 @@ exports.run = function(type, name, pureComponent, stateless) {
                     const componentModule = `${basicUrlCmp}.module.ts`;;
                     fs.pathExists(`./src/components/${name}`, (err, exists) => {
                         if (exists) {
-                            log()
-                            log(
-                                chalk.red(`        Error: ./src/components/${name} already exists`)
-                              );
-                            log()
+                            log(chalk.yellow(`ERROR! ${componentFile} already exists.`));
+                            log(chalk.yellow(`ERROR! ${cssFile} already exists.`));
+                            pureComponent||!stateless?log(chalk.yellow(`ERROR! ${componentInterface} already exists.`)):'';
+                            pureComponent||!stateless?log(chalk.yellow(`ERROR! ${componentModule} already exists.`)):'';
+                            log(chalk.red(`The Schematic workflow failed. See above.`));
+                            log(`[${chalk.red('ERROR')}] Could not generate ${chalk.green('component')}.`)
                         } else {
                             const result = fs.ensureDirSync('src/components/' + name);
                             if(pureComponent||!stateless){
+                                const title = `ag generate component ${name}`
+                                log(`> ${chalk.green(title)}`);
                                 let typeCmp = 'p'
                                 typeCmp = stateless?'s':'p'
                                 fs.writeFileSync(componentFile, ComponentMain(name,NewName));
                                 fs.writeFileSync(componentInterface, ComponentInterface(NewName));
                                 fs.writeFileSync(componentModule, ComponentModule(NewName,typeCmp));
                                 fs.writeFileSync(cssFile, `.container{}`);
-                                const title = `ag generate component ${name}`
-                                log(`> ${chalk.green(title)}`);
-                                log(`${chalk.green('CREATE')}  ${componentFile} ${getSize(componentFile)}`);
-                                log(`${chalk.green('CREATE')}  ${componentInterface} ${getSize(componentInterface)}`);
-                                log(`${chalk.green('CREATE')}  ${componentModule} ${getSize(componentModule)}`);
-                                log(`${chalk.green('CREATE')}  ${cssFile} ${getSize(cssFile)}`);
-                                // over
-                                log(`[${chalk.green('OK')}] Generated ${chalk.green('component')}!`)
+                                setTimeout(function(){
+                                    log(`${chalk.green('CREATE')} ${componentFile} ${getSize(componentFile)}`);
+                                    log(`${chalk.green('CREATE')} ${componentInterface} ${getSize(componentInterface)}`);
+                                    log(`${chalk.green('CREATE')} ${componentModule} ${getSize(componentModule)}`);
+                                    log(`${chalk.green('CREATE')} ${cssFile} ${getSize(cssFile)}`);
+                                    // over
+                                    log(`[${chalk.green('OK')}] Generated ${chalk.green('component')}!`)
+                                },2000)
+                                
                                 
                             } else {
-                                fs.writeFileSync(componentFile, ComponentStatic(name,NewName));
-                                fs.writeFileSync(cssFile, `.container{}`);
                                 const title = `ag generate component ${name}`
                                 log(`> ${chalk.green(title)}`);
-                                log(`${chalk.green('CREATE')}  ${componentFile} ${getSize(componentFile)}`);
-                                log(`${chalk.green('CREATE')}  ${cssFile} ${getSize(cssFile)}`);
-                                log(`[${chalk.green('OK')}] Generated ${chalk.green('component')}!`)
+                                fs.writeFileSync(componentFile, ComponentStatic(name,NewName));
+                                fs.writeFileSync(cssFile, `.container{}`);
+                                
+                                setTimeout(function(){
+                                    log(`${chalk.green('CREATE')} ${componentFile} ${getSize(componentFile)}`);
+                                    log(`${chalk.green('CREATE')} ${cssFile} ${getSize(cssFile)}`);
+                                    log(`[${chalk.green('OK')}] Generated ${chalk.green('component')}!`)
+                                    
+
+                                },2000)
+                                
                             }
                         }
                     });
                     break;
                 default:
-                    console.log(chalk.red(`ERROR: uncaught type , you should input like $ ag g page demo` ))
+                    console.log(chalk.yellow(`ERROR: uncaught type , you should input like $ ag g page demo` ))
                     console.log()
                     console.log('  Examples:')
                     console.log()
