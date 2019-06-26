@@ -39,4 +39,8 @@ program
     // console.log(projectName)
     create.run(projectName);
 });
+
+program
+.version('1.2.0', '-v, --version')
+
 program.parse(process.argv);
