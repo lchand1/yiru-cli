@@ -32,7 +32,7 @@ creatRouter = (files, srcDir, pagesDir) => {
 
     fs.writeFile(path.resolve(process.cwd(), './src/router/Routers.js'), getContent(parent), (file) => {
         //   console.log('\n╭(￣▽￣)╯╭(￣▽￣)╯')
-        console.log('router文件写入完毕')
+        // console.log('router文件写入完毕')
     })
 
 }
@@ -51,4 +51,4 @@ getContent = (Array) => {
     return oldArray
 }
 
-getFileList()
+exports.getFileList =  getFileList

@@ -7,6 +7,7 @@ const chalk = require('chalk');
 const log = console.log;
 const path = require('path');
 
+
 // 创建page.tsx
 const PageMain = (name,Upname)=>{
     return `import React from 'react';
@@ -182,6 +183,9 @@ exports.run = function(type, name, pureComponent, stateless) {
                             fs.writeFileSync(pageModule, PageModule(NewName));
                             // page.scss
                             fs.writeFileSync(styleFile, PageScss());
+                            // Router init
+                            const handleRouter = require('./handleRouter.js');
+                            handleRouter.getFileList()
                             // done
                             setTimeout(function(){
                                 log(`${chalk.green('CREATE')} ${pageFile} ${getSize(pageFile)}`);
