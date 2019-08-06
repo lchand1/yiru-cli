@@ -75,16 +75,13 @@ import css from "./${name}.module.scss";
 import { ${NewName}CompInterface } from "./${name}.interface";
 import { ${NewName}Basic } from "./${name}.module";
 
-interface IProps {}
-interface IState {}
 
 export class ${NewName} extends ${NewName}Basic implements  ${NewName}CompInterface{
-state: IState = {
-};
-public static defaultProps: Partial<IProps> = {}
+
 public render() {
     return (
-        <div className={css.container}></div>
+        <div className={css.container}>
+        </div>
     );
 }
 
@@ -101,10 +98,10 @@ interface IsProps {
 }
 interface IsState {
 }
-export class ${NewName}Basic extends ${Cpm}<IsProps,IsState>{
+export class ${NewName}Basic extends ${Cpm}<Readonly<IsProps>,Readonly<IsState>>{
 
-    state:IsState={}
-
+    readonly state:IsState={}
+    public static defaultProps:  Partial<object> = {}
     public componentDidMount(){}
 }`
 }
@@ -114,7 +111,9 @@ const ComponentInterface=(NewName)=>{
 * ${NewName}组件抽象类
 */
 export interface ${NewName}CompInterface{
-    
+    readonly state:object
+    render():void,
+    componentDidMount():void
 }`
 }
 // component static
