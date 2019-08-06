@@ -218,11 +218,11 @@ exports.run = function(type, name, pureComponent, stateless) {
                                 const title = `ag generate component ${name}`
                                 log(`> ${chalk.green(title)}`);
                                 let typeCmp = 'p'
-                                typeCmp = stateless?'s':'p'
+                                typeCmp = stateless?'s':pureComponent?'p':'c'
                                 fs.writeFileSync(componentFile, ComponentMain(name,NewName));
                                 fs.writeFileSync(componentInterface, ComponentInterface(NewName));
                                 fs.writeFileSync(componentModule, ComponentModule(NewName,typeCmp));
-                                fs.writeFileSync(cssFile, `.container{}`);
+                                fs.writeFileSync(cssFile, `.container{\n\n}`);
                                 setTimeout(function(){
                                     log(`${chalk.green('CREATE')} ${componentFile} ${getSize(componentFile)}`);
                                     log(`${chalk.green('CREATE')} ${componentInterface} ${getSize(componentInterface)}`);
